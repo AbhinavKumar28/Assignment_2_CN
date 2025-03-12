@@ -1,0 +1,4 @@
+a part reno
+Goodput: 92.20 Mbps
+Packet Loss Rate: 48.82%
+Maximum Window Size: 43440 bytes

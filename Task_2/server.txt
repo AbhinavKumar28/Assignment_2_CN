@@ -1,0 +1,15 @@
+Define main():
+    Create a TCP socket using IPv4 and TCP protocol.
+    Bind the socket to all available interfaces on port 8080.
+    Set the socket to listen mode (with a backlog for incoming connections).
+    Display a message indicating that the server is listening.
+
+    While the server is running:
+        Accept an incoming connection, retrieving a connection object and the client’s address.
+        Display a message noting the accepted connection.
+        Read up to 1024 bytes of data from the client.
+        Display the received data.
+        Close the connection.
+
+If this file is executed directly:
+    Call the main() function.

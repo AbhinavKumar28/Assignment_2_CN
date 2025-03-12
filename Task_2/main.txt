@@ -1,0 +1,59 @@
+Define main(filename, mitigate_flag):
+    Set the logging level for the network simulation to 'info'.
+    Create a network topology that includes:
+        - One switch
+        - Two hosts (e.g., h1 and h2)
+    Initialize the network simulation (using a tool like Mininet) with the created topology.
+    Start the network.
+
+    Retrieve the two host objects (h1 and h2).
+    Obtain the IP addresses for h1 and h2.
+
+    For host h2:
+        Adjust kernel parameters:
+            - Set the maximum SYN backlog value.
+            - If mitigation is enabled (mitigate_flag is True):
+                  Enable SYN cookies.
+                  Set the number of SYN-ACK retries to a higher value.
+            - Otherwise (if mitigation is disabled):
+                  Disable SYN cookies.
+                  Use a lower number for SYN-ACK retries.
+
+    On h2:
+        Launch the server (execute the server script) as a background process.
+
+    On h1:
+        Begin packet capture, saving the output to a file named using the provided filename.
+        Start legitimate traffic by running a client script (legitimate.py) with h2’s IP address.
+
+    Wait for 20 seconds (allowing the above processes to initialize).
+
+    If mitigation is not enabled:
+        On h1, modify firewall/iptables rules to drop outgoing TCP RST packets destined for h2 on port 8080.
+    
+    On h1:
+        Initiate a SYN flood attack against h2 by executing a command (for example, using hping3) with specific parameters:
+            - Set the count, packet size, SYN flag, and target port (8080).
+        Display a message indicating that the SYN flood attack has started.
+
+    Wait for 100 seconds to allow the attack to continue.
+    
+    Terminate the SYN flood attack process.
+    Display a message indicating the attack has stopped.
+
+    Wait for another 20 seconds.
+
+    Terminate the legitimate traffic process.
+    Display a message confirming legitimate traffic has stopped.
+
+    Terminate the server process running on h2.
+    Stop and clean up the network simulation.
+
+Process command-line arguments:
+    If the required arguments (filename and mitigation flag) are not provided:
+         Display usage instructions and exit.
+    Otherwise:
+         Call main() with the parsed arguments.
+         
+If this file is executed directly:
+    Execute the command-line argument handling.

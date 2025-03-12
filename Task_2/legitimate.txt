@@ -1,0 +1,19 @@
+Define connect_and_send(server_ip):
+    Create a TCP socket using IPv4.
+    Connect to the server using the provided server IP and port 8080.
+    Send a fixed amount of data (e.g., 100 bytes achieved by repeating a short message).
+    Close the connection.
+
+Define main(server_ip):
+    Loop indefinitely:
+         Start a new background thread to run connect_and_send with the provided server IP.
+         Wait for 1 second before starting the next connection.
+
+Process command-line arguments:
+    If the required server IP is not provided:
+         Display usage instructions and exit.
+    Otherwise:
+         Call main() with the provided server IP.
+         
+If this file is executed directly:
+    Execute the command-line argument handling.
